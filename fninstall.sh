@@ -44,7 +44,7 @@ case "$(uname)" in
     $sh_c "$curl /tmp/fn_linux $url/$version/fn_linux"
     $sh_c "mv /tmp/fn_linux ./fn"
     $sh_c "chmod +x ./fn"
-    fn --version
+    ./fn --version
     ;;
   *)
     cat >&2 <<'EOF'
