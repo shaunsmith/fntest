@@ -5,13 +5,14 @@ services:
 
 before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - curl -LSs https://raw.githubusercontent.com/fnproject/cli/master/install | sh
 
 script:  
   - docker build . -t shaunsmith/myfunc:0.0.1
-
-deploy:
-  provider: script
-  script: docker push shaunsmith/myfunc:0.0.1
+  - docker push shaunsmith/myfunc:0.0.1
+  - fn create app travistest || true
+  - fn create function travistest myfunc shaunsmith/myfunc:0.0.1
+  - fn create trigger --type http --source /myfunc travistest myfunc myfunc-trigger
 
 env:
   matrix:
