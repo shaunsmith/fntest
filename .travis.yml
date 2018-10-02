@@ -1,0 +1,18 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+script:  
+  - docker build -t shaunsmith/myfunc:0.0.1
+
+deploy:
+  provider: script
+  script: docker push shaunsmith/myfunc:0.0.1
+
+env:
+  matrix:
+    secure: WC8cvnCmRlfztgjTAFKz0REajMBqyb/0CKIOGr/SXIzHVvJN/KWvHyEZ8xe17ITZEQtMT/FiQd1LkRUvdeN6JSRHnO9XGZ2pykwQX6d6tc1VaSgCfIXCxB0zPeG2f8wtDqiEmi9N+J1kDvKbZerz59gdHvvfXZfllc+JJiciLuz/zAjumINwSIhkJ2VB/ZyjG59DnTsT819FeNJvz7CL1tINomTETJ0gc3aP6KK+8jYPDJL/D7ldgVMirQs1UMchuH5nNdwVi6PYcvU/ROfZscdL6xTUUCHkTG1E5t6hyquul403TtZ+q6Lhtcx4UevTsfzeo7cR3VQvQsEsm7P8HYT654Ti8t1CorfiZpwqFuXvD883SAaWHd7Yfa3btC0U+oisKD82WzniCd2I1AFQOUTKTt7MVlGDvNx76MKnu3UENvkfput07abQacRzyUYbXulMGtbj91OKnymydE1pxSXGNoFfNFdP21BZ/6kKqkmvm8RWQrEbbYf8IqrM8h3lYKqBUdrwsJIT3b1pcI36qcm0fOJrNwQni9jJH1gsc9zVJE0wGVR03sFBF2CFfBeINTc07XiA47OSqs37ecowbI+a2Px4I1WyI8XlSNEvjQpLxf9SHaVrRdE01lIwDyUDGFRAgp3ous9uoLDsrM4Pn3AUqyNiMWWXeX09ffslGNE=
