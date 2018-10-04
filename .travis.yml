@@ -7,12 +7,9 @@ before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - sh fninstall.sh
 
-script:  
-  - docker build . -t shaunsmith/myfunc:0.0.1
-  - docker push shaunsmith/myfunc:0.0.1
-  - ./fn create app travistest || true
-  - ./fn create function travistest myfunc shaunsmith/myfunc:0.0.1
-  - ./fn create trigger --type http --source /myfunc travistest myfunc myfunc-trigger
+deploy:
+  - provider: script
+    script: fn deploy --app shaun
 
 env:
   matrix:
