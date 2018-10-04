@@ -9,7 +9,7 @@ before_install:
 
 deploy:
   - provider: script
-    script: fn deploy --app shaun
+    script: ./fn deploy --app shaun
 
 env:
   matrix:
